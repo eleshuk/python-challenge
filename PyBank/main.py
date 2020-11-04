@@ -12,13 +12,16 @@ month_count = 0
 total = 0
 
 # set max and min
-max_increase = -999999999
+max_profit = 0
 max_month = ""
-max_decrease = 999999999
+min_profit = 0
 min_month = ""
+total_profit = 0 
+sum_change = 0
 total_change = 0
 last_profit = 0
-change = []
+
+# previous_revenue
 
 with open(csvpath, "r") as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
@@ -35,15 +38,30 @@ with open(csvpath, "r") as csvfile:
         month = row[0]
         profit = int(row[1])
         month_count += 1
-        if month_count ==0:
-            last_profit = profit 
-        #else:
+        if month_count ==1:
+            last_profit = profit
+        else:
+            if (int(row[1]) - last_profit) > max_profit:
+                max_profit = int(row[1])- last_profit
+                max_month = row[0]
+            if (int(row[1]) - last_profit) < min_profit:
+                min_profit = int(row[1]) - last_profit
+                min_month = row[0]
+            sum_change += int(row[1]) - last_profit
+            total_profit += int(row[1])
+            last_profit = int(row[1])
+    
+        total= profit + total
+    average_change = sum_change/(month_count-1)
+    # average_change = round(average_change, 2)
+    
+
             # calculate the change
-            profit_change = profit - prev_profit 
+            #profit_change = profit - last_profit
             # update last_profit
-            last_profit = profit_change 
+            #last_profit = profit_change / month_count
         # calculate the net profits over the entire period
-        total= total + profit
+    #total= profit + total
         # add another month
 
 print("Financial Records")
@@ -53,12 +71,13 @@ print(f'Total Months: {month_count}')
 # print the net total amount of "profits/losses" over the entire period
 print(f'Total: ${total:0,.0f}')
 
-print(f'Total Change: ${last_profit:0,.0f}')
+print(f'Total Change: ${average_change:0,.2f}')
 
-# calculate the average of the changes in "profits/losses over the entire period"
+# # calculate the average of the changes in "profits/losses over the entire period"
 
-# calculate the greatest increase in profits (date and amount) over the entire period
-# greatest_increase = 
-# calculate the greatest decrease in losses (date and amount) over the entire period
-# greatest_decrease = 
+# # calculate the greatest increase in profits (date and amount) over the entire period
+# # greatest_increase = 
+# # calculate the greatest decrease in losses (date and amount) over the entire period
+# # greatest_decrease = 
  
+
