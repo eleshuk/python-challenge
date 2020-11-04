@@ -3,9 +3,8 @@ import os
 import sys
 # module for reading the csv file
 import csv
-csvpath = os.path.join('C:\\Users\\19143\\Desktop\\DataClass\\python-challenge\\PyBank\\Resources\\budget_data.csv')
-# this didn't work, not sure why...
-#csvpath = os.path.join('..', 'Resources', 'budget_data.csv')
+#csvpath = os.path.join('C:\\Users\\19143\\Desktop\\DataClass\\python-challenge\\PyBank\\Resources\\budget_data.csv')
+csvpath = os.path.join ('Resources','budget_data.csv')
 
 # set starting value for the month_count and the total
 month_count = 0
