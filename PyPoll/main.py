@@ -39,12 +39,13 @@ for candidate in candidates:
     vote_count.append(vote_count)
 
     if last_count < total_votes:
-        Winner = candidates
+        Winner = candidate
     print(f"{candidate}: {percent_vote:.3%} ({vote_count})")
 
     # reset vote count to zero
     last_count = total_votes
     total_votes = 0
+    Winner = candidate
 
 print("Election Results")
 print('-------------------------')
@@ -56,3 +57,19 @@ print('-------------------------')
 print(f"Winner: {Winner}")
 print('-------------------------')
 
+stdoutOrigin=sys.stdout 
+text_path = os.path.join('Analysis', 'PyBank_analysis.txt')
+sys.stdout = open(text_path, "w")
+
+print("Election Results")
+print('-------------------------')
+print(f"Total Votes: {total_votes}")
+print('-------------------------')
+for candidate in candidates:
+    index = candidates.index(candidate)
+print(f"{candidates}: {percent_vote:.3%} ({vote_count})")
+print(f"Winner: {Winner}")
+print('-------------------------')
+
+sys.stdout.close()
+sys.stdout=stdoutOrigin
