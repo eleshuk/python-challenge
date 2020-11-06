@@ -93,7 +93,7 @@ for candidate in candidates:
     percentage = vote_count / len(votes)
     percent_vote.append(percentage)
     candidate_count.append(vote_count)
-    
+
     if last_count < vote_count:
         Winner = candidate
     print(f'{candidate}: {percentage:.3%} ({vote_count})')
@@ -101,7 +101,7 @@ for candidate in candidates:
     vote_count = 0
 
 print('-------------------------')
-print(f"Winner: {Winner}")
+print(f'Winner: {Winner}')
 print('-------------------------')
 
 sys.stdout.close()
