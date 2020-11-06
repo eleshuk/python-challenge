@@ -79,18 +79,27 @@ stdoutOrigin=sys.stdout
 text_path = os.path.join('Analysis', 'PyPoll_analysis.txt')
 sys.stdout = open(text_path, "w")
 
+# print election results and total votes
 print("Election Results")
 print('-------------------------')
 print(f'Total Votes: {total_votes}')
 print('-------------------------')
+
+# create for loop to calculate percentage of votes per candidate
 for candidate in candidates:
+    for vote in votes:
+        if candidate == vote:
+            vote_count += 1
+    percentage = vote_count / len(votes)
+    percent_vote.append(percentage)
+    candidate_count.append(vote_count)
+    
     if last_count < vote_count:
         Winner = candidate
     print(f'{candidate}: {percentage:.3%} ({vote_count})')
-        # reset last count to new vote count
-    # last_count = vote_count
-    #     # reset vote count to zero
-    # vote_count = 0
+    last_count = vote_count
+    vote_count = 0
+
 print('-------------------------')
 print(f"Winner: {Winner}")
 print('-------------------------')
