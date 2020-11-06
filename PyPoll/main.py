@@ -19,78 +19,80 @@ with open(csvpath, "r") as csvfile:
     print(csvreader)
     # print header
     csv_header = next(csvreader)
-    print(f"CSV Header: {csv_header}")
+    print(f'CSV Header: {csv_header}')
 
+    # append votes column
     for row in csvreader:
         votes.append(row[2])
-        
+# calculate total number of votes for all candidates        
 total_votes = len(votes)
 
+# append candidates list
 for name in votes:
    if name not in candidates:
         candidates.append(name)
         x = name
 
-# Candidate
+# set candidate list of votes
 candidate = votes[0]
-# Counter (count)
+# set vote counter
 vote_count = 0
-# Set last count
+# set last count
 last_count = 0
 
-# print(f'Candidates: {candidates}')
-# print("Election Results")
-# print('-------------------------')
-# print(f"Total Votes: {total_votes}")
-# print('-------------------------')
-
-for candidate in candidates:
-    for vote in votes:
-        if candidate == vote:
-            vote_count += 1
-    percentage = vote_count / len(votes)
-    percent_vote.append(percentage)
-    candidate_count.append(vote_count)
-
-    if last_count < vote_count:
-        Winner = candidate
-    # print(f"{candidate}: {percentage:.3%} ({vote_count})")
-    # reset vote count to zero
-    last_count = vote_count
-    vote_count = 0
-
-Winner = candidate
-
-# print(f'Candidates: {candidates}')
+# print election results and total votes
 print("Election Results")
 print('-------------------------')
-print(f"Total Votes: {total_votes}")
+print(f'Total Votes: {total_votes}')
 print('-------------------------')
-# for candidate in candidates:
-#     index = candidates.index(candidate)
-#     print(f'{candidate} : {percent_vote}% ({vote_count})')
+
+# create for loop to calculate percentage of votes per candidate
 for candidate in candidates:
-    index = candidates.index(candidate)
-    print(f'{candidate} : {percent_vote}% ({vote_count})')
-# for candidate in candidates:
-#     index = candidates.index(candidate)
+    for vote in votes:
+        # if the candidate has a vote towards them
+        if candidate == vote:
+            # increase vote count by 1
+            vote_count += 1
+    # calculate percent of votes per candidate
+    percentage = vote_count / len(votes)
+    # append the percent vote list
+    percent_vote.append(percentage)
+    # append the candidate count list
+    candidate_count.append(vote_count)
+
+    # if the vote count is greater th
+    if last_count < vote_count:
+        Winner = candidate
+    print(f'{candidate}: {percentage:.3%} ({vote_count})')
+    # reset last count to new vote count
+    last_count = vote_count
+    # reset vote count to zero
+    vote_count = 0
+
+# Winner = candidate
+
 print('-------------------------')
-# print(f"{candidates}: {percent_vote:.3%} ({vote_count})")
-print(f"Winner: {Winner}")
+print(f'Winner: {Winner}')
 print('-------------------------')
 
 stdoutOrigin=sys.stdout 
-text_path = os.path.join('Analysis', 'PyBank_analysis.txt')
+text_path = os.path.join('Analysis', 'PyPoll_analysis.txt')
 sys.stdout = open(text_path, "w")
 
 print("Election Results")
 print('-------------------------')
-print(f"Total Votes: {total_votes}")
+print(f'Total Votes: {total_votes}')
 print('-------------------------')
 for candidate in candidates:
-    index = candidates.index(candidates)
-    print(f"{candidates}: {percent_vote[index]:.3%} ({vote_count[index]})")
-print(f"Winner: {last_count}")
+    if last_count < vote_count:
+        Winner = candidate
+    print(f'{candidate}: {percentage:.3%} ({vote_count})')
+        # reset last count to new vote count
+    # last_count = vote_count
+    #     # reset vote count to zero
+    # vote_count = 0
+print('-------------------------')
+print(f"Winner: {Winner}")
 print('-------------------------')
 
 sys.stdout.close()
